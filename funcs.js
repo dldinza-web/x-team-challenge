@@ -86,10 +86,17 @@ module.exports.findNextMessage = function (inbox, lastHash) {
 
   // read and decode the message
   var messagePath = path.join(inbox.dir, inbox.messages[found].hash)
-  var messageEncoded = fs.readFileSync(messagePath, 'utf-8')
 
-  return 'from: '
-    + decode(inbox.messages[found].from)
-    + '\n---\n'
-    + decode(messageEncoded)
+  return new Promise(function(resolve, reject) {
+    fs.readFile(messagePath, function(err, resp) {
+      if (err) { reject(err) }
+
+      var content = 'from: '
+        + decode(inbox.messages[found].from)
+        + '\n---\n'
+        + decode(resp)
+
+      resolve(content)
+    })
+  });
 }

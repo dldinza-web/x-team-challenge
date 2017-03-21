@@ -85,6 +85,12 @@ module.exports.findNextMessage = function (inbox, lastHash) {
   }
 
   // read and decode the message
-  return 'from: ' + decode(inbox.messages[found].from) + '\n---\n' +
-    decode(fs.readFile(path.join(inbox.dir, inbox.messages[found].hash), 'utf8'))
+  var messagePath = path.join(inbox.dir, inbox.messages[found].hash)
+
+  var messageEncoded = fs.readFileSync(messagePath, 'utf-8')
+
+  return 'from: '
+    + decode(inbox.messages[found].from)
+    + '\n---\n'
+    + decode(messageEncoded)
 }

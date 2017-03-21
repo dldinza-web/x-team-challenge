@@ -85,9 +85,10 @@ module.exports.findNextMessage = function (inbox, lastHash) {
   }
 
   // read and decode the message
-  var messagePath = path.join(inbox.dir, inbox.messages[found].hash)
-
   return new Promise(function(resolve, reject) {
+    if (found === undefined) { reject("File of messages not found") }
+
+    var messagePath = path.join(inbox.dir, inbox.messages[found].hash)
     fs.readFile(messagePath, function(err, resp) {
       if (err) { reject(err) }
 

@@ -1,6 +1,12 @@
 var path = require('path')
 var funcs = require('./funcs')
-var encodeName = funcs.encodName
+
+/*
+Users
+  - theRealElmo   [1 message]
+  - bigbird88     [2 messages]
+  - alice         [1 message]
+*/
 
 var session = {
   username: process.argv[2],

@@ -28,9 +28,9 @@ funcs.loadDb(dbFile, function (err, db) {
   var inbox = funcs.findInbox(db, encoded)
 
   // 4. find the next message
-  var nextMessage = funcs.findNextMessage(inbox, session.lastMessageHash)
-
-  // 5. print out the message.
-  // Paste the console output into the "Solution" field and you're done!
-  console.log(nextMessage)
+  funcs.findNextMessage(inbox, session.lastMessageHash)
+    // 5. print out the message.
+    // Paste the console output into the "Solution" field and you're done!
+    .then(function(nextMessage) { console.log(nextMessage) })
+    .catch(function(err) { console.log(err) })
 })
